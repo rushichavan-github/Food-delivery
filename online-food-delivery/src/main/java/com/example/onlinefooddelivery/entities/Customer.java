@@ -38,7 +38,7 @@ public class Customer {
 	@NotNull
 	private String address;
 	@NotNull
-	private Long mobileNumber;
+	private long mobileNumber;
 	@NotNull
 	private String emailId;
 	

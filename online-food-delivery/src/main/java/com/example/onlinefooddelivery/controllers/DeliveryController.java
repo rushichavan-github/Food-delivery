@@ -24,7 +24,7 @@ public class DeliveryController {
 	@Autowired
     private DeliveryService deliveryService;
 
-    @GetMapping("/fetchalldeliveries")
+    @GetMapping("/fetchall")
     public ResponseEntity<List<Delivery>> getAllDeliveries() {
         return new ResponseEntity<>(deliveryService.getAllDeliveries(), HttpStatus.OK);
     }

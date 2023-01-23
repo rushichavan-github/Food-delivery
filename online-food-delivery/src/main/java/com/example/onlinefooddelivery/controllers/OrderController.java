@@ -20,36 +20,37 @@ import com.example.onlinefooddelivery.exceptions.NoOrderFoundException;
 import com.example.onlinefooddelivery.services.OrderService;
 
 @RestController
+@RequestMapping("/order")
 public class OrderController {
 		
 		@Autowired
 		private OrderService ordServ;
 		
-		@PostMapping("/addOrder")
+		@PostMapping("/add")
 		public ResponseEntity<Order> addOrder(@RequestBody Order order){
 			Order savedOrder = ordServ.addOrder(order);
 			return new ResponseEntity<Order>(savedOrder,HttpStatus.OK);
 		}
 		
-		@PutMapping("/updateOrder")
+		@PutMapping("/update")
 		public ResponseEntity<Order> updateOrder(@RequestBody Order order) throws NoOrderFoundException{
 			Order updateOrder = ordServ.updateOrder(order);
 			return new ResponseEntity<Order>(updateOrder,HttpStatus.ACCEPTED);
 		}
 		
-		@GetMapping("/viewOrderById/{id}")
+		@GetMapping("/view/{id}")
 		public ResponseEntity<Optional<Order> > viewOrderById(@PathVariable long id) throws NoOrderFoundException{
 			Optional<Order>  order = ordServ.viewOrderById(id);
 			return new ResponseEntity<> (order,HttpStatus.OK);
 		}
 		
-		@GetMapping("/viewAllOrder")
+		@GetMapping("/viewAll")
 		public ResponseEntity<List<Order>> viewAllOrder() throws NoOrderFoundException{
 			List<Order> allOrder = ordServ.viewAllOrder();
  		return new ResponseEntity<List<Order>>(allOrder,HttpStatus.FOUND);
 		}
 		
-		@DeleteMapping("/deleteOrder/{id}")
+		@DeleteMapping("/delete/{id}")
 		public ResponseEntity<String> deleteOrder(@PathVariable long id) throws NoOrderFoundException{
 			String  m = ordServ.deleteOrder(id);
 			return new ResponseEntity<String>(m,HttpStatus.ACCEPTED);

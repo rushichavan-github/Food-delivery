@@ -15,32 +15,34 @@ public class CategoryServiceImpl implements CategoryService{
 	@Autowired
 	private CategoryRepository catRepo;
 	
+	
 	@Override
 	public Category addCategory(Category category) {
-		// TODO Auto-generated method stub
 		Category saved= catRepo.save(category);
 		return saved;
 	}
 
 	@Override
 	public List<Category> viewAllCategory() {
-		// TODO Auto-generated method stub
 		List<Category> allCategories=catRepo.findAll();
 		return allCategories;
 	}
 
 	@Override
-	public Category updateCategory(Category category) {
-		// TODO Auto-generated method stub
-		Category updateCategory = catRepo.save(category);
-		return updateCategory;
+	public Category updateCategory(Category category) throws NoCategoryFoundException {
+		if(catRepo.existsById(category.getCategoryId())) {
+			Category updateCategory = catRepo.save(category);
+			return updateCategory;
+		}else {
+			throw new NoCategoryFoundException();
+		}
+		
 	}
 
 	@Override
 	public String deleteCategory(long id) throws NoCategoryFoundException {
-		// TODO Auto-generated method stub
-		if(catRepo.existsById((int) id)) {
-			catRepo.deleteById((int) id);
+		if(catRepo.existsById(id)) {
+			catRepo.deleteById(id);
 			return "Category Deleted Succesfully";
 		}else 
 			throw new NoCategoryFoundException();

@@ -24,36 +24,36 @@ import com.example.onlinefooddelivery.services.CustomerService;
 
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/customer")
 public class CustomerController {
 	
 	@Autowired
 	private CustomerService cusServ;
 	
-	@PostMapping("/addCustomers")
+	@PostMapping("/add")
 	public ResponseEntity<Customer> addCustomers(@RequestBody Customer customer){
 		Customer saveCustomer= cusServ.addCustomer(customer);
 		return new ResponseEntity<Customer>(saveCustomer,HttpStatus.OK);
 	}
 	
-	@GetMapping("/fetchCustomerById/{id}")
-	public ResponseEntity<Optional<Customer>> fetchCustomerById(@PathVariable int id) throws NoCustomerFoundException{
+	@GetMapping("/fetch/{id}")
+	public ResponseEntity<Optional<Customer>> fetchCustomerById(@PathVariable long id) throws NoCustomerFoundException{
 		Optional<Customer> customer = cusServ.getById(id);
 		return new ResponseEntity<>(customer,HttpStatus.FOUND);
 	}
 	
-	@PutMapping("/updateCustomer")
-	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
+	@PutMapping("/update")
+	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) throws NoCustomerFoundException{
 		Customer upCust = cusServ.updateCustomer(customer);
 		return new ResponseEntity<Customer>(upCust,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/fetchAllcutomers")
+	@GetMapping("/fetchAll")
 	public ResponseEntity<List<Customer>> fetchAllCustomers(){
 		List<Customer> allCusList= cusServ.getAllCustomer();
 		return new ResponseEntity<>(allCusList,HttpStatus.FOUND);
 	}
-	@DeleteMapping("/removeCustomer/{id}")
+	@DeleteMapping("/remove/{id}")
 	public ResponseEntity<String> removeCustomer(@PathVariable int id) throws NoCustomerFoundException{
 		return new ResponseEntity<String>(cusServ.removeCustomer(id), HttpStatus.ACCEPTED);
 		

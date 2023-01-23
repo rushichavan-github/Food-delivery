@@ -19,7 +19,6 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public Admin saveAdmin(Admin ad) throws AdminAlreadyExistsException {
-		// TODO Auto-generated method stub
 		if(adRepo.existsById(ad.getId())) {
 			throw new AdminAlreadyExistsException();
 		}
@@ -29,10 +28,10 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public String loginAdmin(Admin ad) {
-		// TODO Auto-generated method stub
 		Optional<Admin> admin =adRepo.findById(ad.getId());
 		if(admin.isPresent()) {
-			if(admin.get().getAdminPassword().equals(ad.getAdminPassword()))
+			if((admin.get().getAdminPassword().equals(ad.getAdminPassword()))
+					&& (admin.get().getAdminUserName().equals(ad.getAdminUserName())))
 				return "Successfully Logged In";
 		}
 		return "Invalid Credentials";
@@ -40,7 +39,6 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public List<Admin> getAdmin() {
-		// TODO Auto-generated method stub
 		return adRepo.findAll();
 	}
 

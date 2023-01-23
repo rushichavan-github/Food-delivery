@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -21,8 +22,8 @@ public class Admin {
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private long id;
-		@Column(nullable = false)
+		@Size(min=5)
 		private String adminUserName;
-		@Column(nullable = false)
+		@Size(min = 5)
 		private String adminPassword;
 }

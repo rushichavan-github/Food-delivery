@@ -21,14 +21,12 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public Customer addCustomer(Customer customer) {
-		// TODO Auto-generated method stub
 		Customer saveCustomer = custRepo.save(customer);
 		return saveCustomer;
 	}
 
 	@Override
-	public Optional<Customer> getById(int id) throws NoCustomerFoundException {
-		// TODO Auto-generated method stub
+	public Optional<Customer> getById(long id) throws NoCustomerFoundException {
 	   Optional<Customer> cust =	custRepo.findById(id);
 	   if(cust==null)
 		   throw new NoCustomerFoundException();
@@ -36,22 +34,24 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer updateCustomer(Customer customer) {
-		// TODO Auto-generated method stub
+	public Customer updateCustomer(Customer customer) throws NoCustomerFoundException {
+		if(custRepo.existsById(customer.getCustomerId())) {
 		Customer upCustomer= custRepo.save(customer);
 		return upCustomer;
+		}else {
+			throw new NoCustomerFoundException();
+		}
+		
 	}
 
 	@Override
 	public List<Customer> getAllCustomer() {
-		// TODO Auto-generated method stub
 		List<Customer> allCus =custRepo.findAll();
 		return allCus;
 	}
 
 	@Override
-	public String removeCustomer(int id) throws NoCustomerFoundException {
-		// TODO Auto-generated method stub
+	public String removeCustomer(long id) throws NoCustomerFoundException {
 		if(custRepo.existsById(id)) {
 			custRepo.deleteById(id);
 			return "Customer Deleted";}

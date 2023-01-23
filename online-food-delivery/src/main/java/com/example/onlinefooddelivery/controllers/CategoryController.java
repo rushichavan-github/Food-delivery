@@ -27,25 +27,25 @@ public class CategoryController {
 	
 	
 	
-	@PostMapping("/addCategory")
+	@PostMapping("/add")
 	public ResponseEntity<Category> addCategory(@RequestBody Category category){
 		Category saved = catServ.addCategory(category);
 		return new ResponseEntity<Category>(saved,HttpStatus.OK);
 	}
 	
-	@GetMapping("/viewAllCategory")
+	@GetMapping("/viewAll")
 	public ResponseEntity<List<Category>> viewAllCategory(){
 		List<Category> allCategories= catServ.viewAllCategory();
 		return new ResponseEntity<List<Category>>(allCategories,HttpStatus.ACCEPTED);
 	}
 	
-	@PutMapping("/updateCategory")
-	public ResponseEntity<Category> updateCategory(@RequestBody Category category){
+	@PutMapping("/update")
+	public ResponseEntity<Category> updateCategory(@RequestBody Category category) throws NoCategoryFoundException{
 		Category updateCategory = catServ.updateCategory(category);
 		return new ResponseEntity<Category>(updateCategory,HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("/deleteCategory/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteCategory(@PathVariable long id) throws NoCategoryFoundException{
 		return new ResponseEntity<String>(catServ.deleteCategory(id),HttpStatus.OK);
 	}

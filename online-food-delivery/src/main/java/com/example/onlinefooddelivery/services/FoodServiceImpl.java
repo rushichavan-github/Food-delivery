@@ -21,7 +21,6 @@ public class FoodServiceImpl implements FoodService{
 	
 	@Override
 	public Food addFoodItem(Food food) throws FoodAlreadyExistsException {
-		// TODO Auto-generated method stub
 		if(foodRepo.existsById(food.getFoodId()))
 			throw new FoodAlreadyExistsException();
 		Food addedFood = foodRepo.save(food); 
@@ -30,7 +29,6 @@ public class FoodServiceImpl implements FoodService{
 
 	@Override
 	public Food updateFoodItem(Food food) throws NoFoodFoundException {
-		// TODO Auto-generated method stub
 		if(foodRepo.existsById(food.getFoodId())) {
 		Food updatefood = foodRepo.save(food);
 		return updatefood;
@@ -43,9 +41,8 @@ public class FoodServiceImpl implements FoodService{
 
 	@Override
 	public Food fetchById(long id) throws NoFoodFoundException {
-		// TODO Auto-generated method stub
 		if(foodRepo.existsById(id))
-			return foodRepo.getById(id);
+			return foodRepo.findById(id).get();
 		else {
 			throw new NoFoodFoundException();
 		}
@@ -53,14 +50,11 @@ public class FoodServiceImpl implements FoodService{
 
 	@Override
 	public List<Food> fetchAllFoodItems() {
-		// TODO Auto-generated method stub
-		
 		return foodRepo.findAll();
 	}
 
 	@Override
 	public String deleteFoodById(long id) throws NoFoodFoundException {
-		// TODO Auto-generated method stub
 		if(foodRepo.existsById(id)) {
 			foodRepo.deleteById(id);
 			return "Food item deleted Successfully";

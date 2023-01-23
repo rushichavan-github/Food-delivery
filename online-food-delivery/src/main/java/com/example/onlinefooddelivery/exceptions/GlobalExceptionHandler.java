@@ -37,4 +37,15 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<String> adminAlreadyExistsException(){
 		return new ResponseEntity<String>("Admin Already Exists!",HttpStatus.CONFLICT);
 	}
+	
+	@ExceptionHandler(value = NoCartFoundException.class)
+	public ResponseEntity<String> noCartFoundException(){
+		return new ResponseEntity<String>("No Cart Found!",HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(value = FoodOutOfStockException.class)
+	public ResponseEntity<String> foodOutOfStockException(){
+		return new ResponseEntity<String>("Food Out of Stock!",HttpStatus.NOT_FOUND);
+	}
+
 }

@@ -17,14 +17,12 @@ public class OrderServImpl implements OrderService {
 	
 	@Override
 	public Order addOrder(Order order) {
-		// TODO Auto-generated method stub
 		Order savedOrder = orderRepo.save(order);
 		return savedOrder;
 	}
 
 	@Override
 	public Order updateOrder(Order order) throws NoOrderFoundException {
-		// TODO Auto-generated method stub
 		if(orderRepo.existsById(order.getOrderId())){
 				Order upOrder = orderRepo.save(order);
 				return upOrder;
@@ -36,7 +34,6 @@ public class OrderServImpl implements OrderService {
 
 	@Override
 	public Optional<Order> viewOrderById(long id) throws NoOrderFoundException {
-		// TODO Auto-generated method stub
 		if(orderRepo.existsById(id)) {
 			return orderRepo.findById(id);
 		}else {
@@ -46,14 +43,11 @@ public class OrderServImpl implements OrderService {
 
 	@Override
 	public List<Order> viewAllOrder() {
-		// TODO Auto-generated method stub
-		
 		return orderRepo.findAll();
 	}
 
 	@Override
 	public String deleteOrder(long id) throws NoOrderFoundException {
-		// TODO Auto-generated method stub
 		if(orderRepo.existsById(id)) {
 			orderRepo.deleteById(id);
 			return "Order Deleted Successfully";
@@ -62,7 +56,4 @@ public class OrderServImpl implements OrderService {
 			throw new NoOrderFoundException();
 		}
 	}
-
-	
-
 }

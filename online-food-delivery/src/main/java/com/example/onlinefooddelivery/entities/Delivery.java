@@ -1,6 +1,8 @@
 package com.example.onlinefooddelivery.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 import java.time.LocalDate;
 
@@ -17,6 +19,7 @@ import lombok.Setter;
 public class Delivery {
 		
 	 	@Id
+	 	@GeneratedValue(strategy = GenerationType.AUTO)
 	    private long id;
 	    
 	    @Column(nullable = false)
