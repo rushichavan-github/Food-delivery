@@ -18,16 +18,22 @@ import com.example.onlinefooddelivery.entities.Customer;
 import com.example.onlinefooddelivery.exceptions.NoCustomerFoundException;
 import com.example.onlinefooddelivery.repositories.CustomerRepository;
 import com.example.onlinefooddelivery.services.CustomerServiceImpl;
-
+/**
+ * 
+ * @author rushikesh chavan
+ *
+ */
 @ExtendWith(MockitoExtension.class)
-public class CustomerServiceTest {
+ class CustomerServiceTest {
 	
 	@InjectMocks
 	private CustomerServiceImpl customerServiceImpl;
 	
 	@Mock private CustomerRepository customerRepository;
 	
-	
+	/**
+	 * This test case is used to test getAllCustomer method 
+	 */
 	@Test void getAllCustomer() {
 		when(customerRepository.findAll()).thenReturn((List<Customer>) Stream.of(new Customer(1,"rushi","rushi@123","Bidar",297362974,"rushi12@gmail.com"))
 
@@ -36,7 +42,10 @@ public class CustomerServiceTest {
 		Assertions.assertEquals(1, customerServiceImpl.getAllCustomer().size());
 		
 	}
-	
+	/**
+	 * This test case is used test updateCustomer
+	 * @throws NoCustomerFoundException when no customer is present
+	 */
 	@Test
 	void updateCustomer_success() throws NoCustomerFoundException {
 
@@ -53,7 +62,6 @@ public class CustomerServiceTest {
 		}
 	
 	@Test
-
 	void updateCustomer_exception() throws NoCustomerFoundException {
 
 	Customer cus = new Customer(2,"rushi","rushi@123","Bidar",297362974,"rushi12@gmail.com");

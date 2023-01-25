@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.onlinefooddelivery.entities.Cart;
-import com.example.onlinefooddelivery.entities.Food;
 import com.example.onlinefooddelivery.exceptions.FoodAlreadyExistsException;
 import com.example.onlinefooddelivery.exceptions.FoodOutOfStockException;
 import com.example.onlinefooddelivery.exceptions.NoCartFoundException;
 import com.example.onlinefooddelivery.exceptions.NoFoodFoundException;
-import com.example.onlinefooddelivery.repositories.FoodRepository;
 import com.example.onlinefooddelivery.services.CartService;
 
 @RestController
@@ -34,31 +32,25 @@ public class CartController {
     public ResponseEntity<Cart> addItemToCart(@RequestBody Cart cart, @PathVariable long foodId,
             @PathVariable long customerId) throws FoodAlreadyExistsException {
         Cart addToCart = cartServ.addItemToCart(cart, foodId,customerId);
-        return new ResponseEntity<Cart>(addToCart, HttpStatus.OK);
+        return new ResponseEntity<>(addToCart, HttpStatus.OK);
     }
 	
-	@PutMapping("/increaseQuantity/{cartId}/{foodId}/{quantity}")
-	public ResponseEntity<Cart> increaseQuantity(@PathVariable long cartId,@PathVariable long foodId,@PathVariable int quantity) throws NoCartFoundException, NoFoodFoundException, FoodOutOfStockException{
-		Cart incQntCart= cartServ.increaseQuantity(cartId,foodId,quantity);
-		return new ResponseEntity<Cart>(incQntCart,HttpStatus.OK);
-	}
-	
-	@PutMapping("/decreaseQuantity/{cartId}/{foodId}/{quantity}")
-	public ResponseEntity<Cart> deccreaseQuantity(@PathVariable long cartId,@PathVariable long foodId,@PathVariable int quantity) throws NoCartFoundException, NoFoodFoundException, FoodOutOfStockException{
-		Cart decQntCart= cartServ.decreaseQuantity(cartId,foodId,quantity);
-		return new ResponseEntity<Cart>(decQntCart,HttpStatus.OK);
+	@PutMapping("/updateItem/{foodId}")
+	public ResponseEntity<Cart> updateCart(@RequestBody Cart cart, @PathVariable long foodId) throws NoCartFoundException{
+		 Cart addToCart = cartServ.updateCart(cart, foodId);
+	        return new ResponseEntity<>(addToCart, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/removeItem/{cartId}/{foodId}")
 	public ResponseEntity<Cart> removeItem(@PathVariable long cartId,@PathVariable long foodId) throws NoCartFoundException, NoFoodFoundException{
 		Cart removeFromCart = cartServ.removeItem(cartId,foodId);
-		return new ResponseEntity<Cart>(removeFromCart,HttpStatus.OK);
+		return new ResponseEntity<>(removeFromCart,HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/clearCart/{cartId}")
 	public ResponseEntity<Cart> clearCart(@PathVariable long cartId) throws NoCartFoundException{
 		Cart empCart=cartServ.clearCart(cartId);
-		return new ResponseEntity<Cart>(empCart,HttpStatus.OK);
+		return new ResponseEntity<>(empCart,HttpStatus.OK);
 	}
 	
 	

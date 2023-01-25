@@ -29,13 +29,13 @@ public class OrderController {
 		@PostMapping("/add")
 		public ResponseEntity<Order> addOrder(@RequestBody Order order){
 			Order savedOrder = ordServ.addOrder(order);
-			return new ResponseEntity<Order>(savedOrder,HttpStatus.OK);
+			return new ResponseEntity<>(savedOrder,HttpStatus.OK);
 		}
 		
 		@PutMapping("/update")
 		public ResponseEntity<Order> updateOrder(@RequestBody Order order) throws NoOrderFoundException{
 			Order updateOrder = ordServ.updateOrder(order);
-			return new ResponseEntity<Order>(updateOrder,HttpStatus.ACCEPTED);
+			return new ResponseEntity<>(updateOrder,HttpStatus.ACCEPTED);
 		}
 		
 		@GetMapping("/view/{id}")
@@ -45,15 +45,15 @@ public class OrderController {
 		}
 		
 		@GetMapping("/viewAll")
-		public ResponseEntity<List<Order>> viewAllOrder() throws NoOrderFoundException{
+		public ResponseEntity<List<Order>> viewAllOrder(){
 			List<Order> allOrder = ordServ.viewAllOrder();
- 		return new ResponseEntity<List<Order>>(allOrder,HttpStatus.FOUND);
+ 		return new ResponseEntity<>(allOrder,HttpStatus.FOUND);
 		}
 		
 		@DeleteMapping("/delete/{id}")
 		public ResponseEntity<String> deleteOrder(@PathVariable long id) throws NoOrderFoundException{
 			String  m = ordServ.deleteOrder(id);
-			return new ResponseEntity<String>(m,HttpStatus.ACCEPTED);
+			return new ResponseEntity<>(m,HttpStatus.ACCEPTED);
 		}
 		
 }

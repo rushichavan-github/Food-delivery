@@ -21,23 +21,21 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public Customer addCustomer(Customer customer) {
-		Customer saveCustomer = custRepo.save(customer);
-		return saveCustomer;
+		return custRepo.save(customer);
 	}
 
 	@Override
 	public Optional<Customer> getById(long id) throws NoCustomerFoundException {
-	   Optional<Customer> cust =	custRepo.findById(id);
-	   if(cust==null)
+	   Optional<Customer> cust =custRepo.findById(id);
+	   if(cust.isEmpty())
 		   throw new NoCustomerFoundException();
-		return cust;
+	return cust;
 	}
 
 	@Override
 	public Customer updateCustomer(Customer customer) throws NoCustomerFoundException {
 		if(custRepo.existsById(customer.getCustomerId())) {
-		Customer upCustomer= custRepo.save(customer);
-		return upCustomer;
+		return custRepo.save(customer);
 		}else {
 			throw new NoCustomerFoundException();
 		}
@@ -46,8 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> getAllCustomer() {
-		List<Customer> allCus =custRepo.findAll();
-		return allCus;
+		return custRepo.findAll();
 	}
 
 	@Override

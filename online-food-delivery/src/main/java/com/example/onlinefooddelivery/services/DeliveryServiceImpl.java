@@ -33,7 +33,6 @@ public class DeliveryServiceImpl implements DeliveryService{
     @Override
 	public Optional<Delivery> getDeliveryById(long id) {
 		
-		Optional<Delivery> view=deliveryRepository.findById(id);
-		return view;
+		return deliveryRepository.findById(id);
 	}
 }

@@ -31,8 +31,9 @@ public class AdminServiceImpl implements AdminService{
 		Optional<Admin> admin =adRepo.findById(ad.getId());
 		if(admin.isPresent()) {
 			if((admin.get().getAdminPassword().equals(ad.getAdminPassword()))
-					&& (admin.get().getAdminUserName().equals(ad.getAdminUserName())))
+					&& (admin.get().getAdminUserName().equals(ad.getAdminUserName()))) {
 				return "Successfully Logged In";
+			}
 		}
 		return "Invalid Credentials";
 	}

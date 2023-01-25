@@ -1,6 +1,5 @@
 package com.example.onlinefooddelivery.controllers;
 
-import java.lang.module.ResolutionException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,29 +29,29 @@ public class FoodController {
 	@PostMapping("/add")
 	public ResponseEntity<Food> addFoodItem(@RequestBody Food food) throws FoodAlreadyExistsException{
 		Food savedFood = foodServ.addFoodItem(food);
-		return new ResponseEntity<Food>(savedFood,HttpStatus.OK);
+		return new ResponseEntity<>(savedFood,HttpStatus.OK);
 	}
 	
 	@PutMapping("/update")
 	public ResponseEntity<Food> updateFoodItem(@RequestBody Food food) throws NoFoodFoundException{
 		Food updFood = foodServ.updateFoodItem(food);
-		return new ResponseEntity<Food>(updFood,HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(updFood,HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("/fetch/{id}")
 	public ResponseEntity<Food> fetchById(@PathVariable long id) throws NoFoodFoundException{
 		Food food = foodServ.fetchById(id);
-		return new ResponseEntity<Food>(food,HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(food,HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("/fetchAll")
 	public ResponseEntity<List<Food>> fetchAllFoodItem(){
-		return new ResponseEntity<List<Food>>(foodServ.fetchAllFoodItems(),HttpStatus.OK);
+		return new ResponseEntity<>(foodServ.fetchAllFoodItems(),HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteFoodById(@PathVariable long id) throws NoFoodFoundException{
 		String string = foodServ.deleteFoodById(id);
-		return new ResponseEntity<String>(string,HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(string,HttpStatus.ACCEPTED);
 	}
 }

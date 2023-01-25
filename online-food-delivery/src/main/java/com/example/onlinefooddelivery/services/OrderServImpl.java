@@ -17,15 +17,13 @@ public class OrderServImpl implements OrderService {
 	
 	@Override
 	public Order addOrder(Order order) {
-		Order savedOrder = orderRepo.save(order);
-		return savedOrder;
+		return orderRepo.save(order);
 	}
 
 	@Override
 	public Order updateOrder(Order order) throws NoOrderFoundException {
 		if(orderRepo.existsById(order.getOrderId())){
-				Order upOrder = orderRepo.save(order);
-				return upOrder;
+				return orderRepo.save(order);
 		}
 		else{
 		 throw new NoOrderFoundException();	

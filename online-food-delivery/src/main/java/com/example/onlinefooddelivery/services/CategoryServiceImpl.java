@@ -18,21 +18,18 @@ public class CategoryServiceImpl implements CategoryService{
 	
 	@Override
 	public Category addCategory(Category category) {
-		Category saved= catRepo.save(category);
-		return saved;
+		return catRepo.save(category);
 	}
 
 	@Override
 	public List<Category> viewAllCategory() {
-		List<Category> allCategories=catRepo.findAll();
-		return allCategories;
+		return catRepo.findAll();
 	}
 
 	@Override
 	public Category updateCategory(Category category) throws NoCategoryFoundException {
 		if(catRepo.existsById(category.getCategoryId())) {
-			Category updateCategory = catRepo.save(category);
-			return updateCategory;
+			return catRepo.save(category);
 		}else {
 			throw new NoCategoryFoundException();
 		}

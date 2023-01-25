@@ -18,9 +18,13 @@ import com.example.onlinefooddelivery.entities.Category;
 import com.example.onlinefooddelivery.exceptions.NoCategoryFoundException;
 import com.example.onlinefooddelivery.repositories.CategoryRepository;
 import com.example.onlinefooddelivery.services.CategoryServiceImpl;
-
+/**
+ * 
+ * @author rushikesh chavan
+ *
+ */
 @ExtendWith(MockitoExtension.class)
-public class CategoryServiceTest {
+class CategoryServiceTest {
 		
 	@InjectMocks
 	private CategoryServiceImpl catgServiceImpl;
@@ -28,6 +32,10 @@ public class CategoryServiceTest {
 	@Mock 
 	private CategoryRepository catgRepository;
 	
+	/**
+	 * This test case is to test viewAllCatgegory method
+	 *
+	 */
 	@Test void getAllCategory() {
 		when(catgRepository.findAll()).thenReturn((List<Category>) Stream.of(new Category(1,"starter"))
 
@@ -37,6 +45,10 @@ public class CategoryServiceTest {
 		
 	}
 	
+	/**
+	 * This test case is to test updateCategory method
+	 * @throws NoCategoryFoundException when category is not present
+	 */
 	@Test
 	void updateCategory_success() throws NoCategoryFoundException {
 
@@ -51,9 +63,12 @@ public class CategoryServiceTest {
 		Assertions.assertEquals(2, sch.getCategoryId());
 
 		}
-	
+	/**
+	 * This test case is to test updateCategory method and this will throw Exception
+	 * @throws NoCategoryFoundException when category is not present
+	 *
+	 */
 	@Test
-
 	void updateCategory_exception() throws NoCategoryFoundException{
 
 	Category newCategory= new Category(6,"main course");

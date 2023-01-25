@@ -33,5 +33,5 @@ public class Cart {
 		@JoinColumn(name = "customer_id")
 		private Customer customer;
 		@OneToMany
-		private List<Food> foodItem=new ArrayList<Food>();
+		private List<Food> foodItem=new ArrayList<>();
 }
